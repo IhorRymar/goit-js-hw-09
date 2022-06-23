@@ -7,7 +7,7 @@ const refs = {
   amount: document.querySelector('[name=amount]'),
 };
 
-// let position = 0;
+let position = 0;
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
@@ -29,9 +29,9 @@ function submitForm(e) {
   e.preventDefault();
 
   setTimeout(() => {
-    for (let i = 0; i < refs.amount.value; i += 1) {
-      let totalStep = Number(refs.delay.value) + Number(refs.step.value) * i;
-      // position = i + 1;
+    for (let i = 1; i < refs.amount.value; i += 1) {
+      let totalStep = Number(refs.delay.value) + Number(refs.step.value) * position;
+      position = i + 1;
       createPromise(i, totalStep)
         .then(({ position, delay }) => {
           Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
